@@ -3,7 +3,7 @@ const { nanoid } = require('nanoid');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 const { mapDBToModel } = require('../../utils');
-const AuthorizationError = require('../../exceptions/AuthenticationError');
+const AuthorizationError = require('../../exceptions/AuthorizationError');
 
 class NotesService {
   constructor() {
@@ -16,8 +16,8 @@ class NotesService {
     const updatedAt = createdAt;
 
     const query = {
-      text: 'INSERT INTO notes VALUES($1, $2, $3, $4, $5, $6) RETURNING id',
-      values: [id, title, body, tags, createdAt, owner],
+      text: 'INSERT INTO notes VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id',
+      values: [id, title, body, tags, createdAt, createdAt, owner],
     };
 
     const result = await this._pool.query(query);
