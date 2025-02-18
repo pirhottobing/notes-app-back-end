@@ -1,5 +1,3 @@
-const authentications = require("../authentications");
-
 const routes = (handler) => [
   {
     method: 'POST',
